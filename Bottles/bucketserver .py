@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 import time
+import B
 #import Mix_group
 #from common import Carrier
 import random
@@ -60,29 +61,36 @@ def carrier():
 
 @app.route('/mixer/<groupid>')
 def button(groupid):
-    d=groupid
-    return jsonify(d)
+    #d=groupid
+    #return jsonify(d)
     #B=Mix_group
-    #if groupid=='000':
+    if groupid=='000':
+        return str(B.A())
         #return str(B.catch_powder())
-    #elif groupid=='100':
-        
+    elif groupid=='100':
+        return str(B.B())    
         #return str(B.mixed_powder())
-    #elif groupid=='200':
+    elif groupid=='200':
+        return str(B.C())
         #return str(B.powder_feeding())
-    #elif groupid=='300':
+    elif groupid=='300':
+        return str(B.D())
         #return str(B.mixed_abrasive())
-    #elif groupid=='400':
+    elif groupid=='400':
+        return str(B.E())
         #return str(B.make_wetting_agent())
-    #elif groupid=='500':
+    elif groupid=='500':
+        return str(B.F())
         #return str(B.add_wetting_agent())
-    #elif groupid=='600':
+    elif groupid=='600':
+        return str(B.G())
         #return str(B.abrasive_feeding())
 
 @app.route('/carrier/moveto/<groupid>')
 def moveto(groupid):
-    d=int(groupid)
-    return jsonify(d)
+    return str(B.A())
+    #d=int(groupid)
+    #return jsonify(d)
     #car=Carrier([13,6,5,0,11], 18, 23, 12, 25, 20, 24)
     #return str(car.moveto(d))
 
