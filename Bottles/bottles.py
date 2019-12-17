@@ -85,8 +85,8 @@ class Bottles(object):
             t.start()
 if __name__ == '__main__':
     while True:
-        pygame.draw.rect(screen,Red,[668,368,347,100],2)
-        pygame.draw.rect(screen,Red,[668,486,347,100],2)
+        pygame.draw.rect(screen,Red,[size0*3+50,368,347,100],2)
+        pygame.draw.rect(screen,Red,[size0*3+50,486,347,100],2)
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -185,7 +185,7 @@ if __name__ == '__main__':
         text11=json.loads(html11)
         B0=[[0,70,160,text8['0']],[1,70,30,text8['1']],[2,size0*2+70,240,text8['2']],[3,size0*2+70,120,text8['3']],[4,size0*2+70,0,text8['4']]]
         B1=[[0,size0*5+70,160,text9['0']],[1,size0*5+70,30,text9['1']],[2,size0*7+70,160,text9['2']],[3,size0*7+70,30,text9['3']]]
-        list=[[0,700,400,'粉体顶料'],[1,700,520,'粉体底料'],[2,900,400,'磨料顶料'],[3,900,520,'磨料底料']]
+        list=[[0,size0*3+85,400,'粉体顶料'],[1,size0*3+85,520,'粉体底料'],[2,size0*4+80,400,'磨料顶料'],[3,size0*4+80,520,'磨料底料']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for i in B0:
