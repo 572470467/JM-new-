@@ -16,7 +16,7 @@ os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67,27)
 state='closey'
 state_a=['close','close','close','close','close']
 state_b=['close','close','close','close']
-line=['http://192.168.10.200:80/measure/{0}/{1}','http://192.168.10.201:80/measure/{0}/{1}']
+line=['http://192.168.10.200:80/measure/{0}/{1}','http://192.168.10.201:5000/measure/{0}/{1}']
 Brack=[0,0,0]
 White=[255,255,255]
 Red=[255,0,0]
@@ -121,14 +121,14 @@ if __name__ == '__main__':
                                 if state_a==['close','close','close','close','close']:
                                     if index ==0:
                                         state_a[i[0]]='open'
-                                        #response0=urllib.request.urlopen('http://192.168.10.200:80/feeder/{}/1'.format(i[0]))
+                                        #response0=urllib.request.urlopen('http://192.168.10.200:5000/feeder/{}/1'.format(i[0]))
                                         #html0=response0.read()
                                         #text0=json.loads(html0)
                                         print('http://192.168.10.200:80/feeder/{}/1'.format(i[0]))
                                 elif state_a[i[0]]=='open':
                                     if index ==2:
                                         state_a[i[0]]='close'
-                                        #response1=urllib.request.urlopen('http://192.168.10.200:80/feeder/{}/0'.format(i[0]))
+                                        #response1=urllib.request.urlopen('http://192.168.10.200:5000/feeder/{}/0'.format(i[0]))
                                         #html1=response1.read()
                                         #text1=json.loads(html1)
                                         print('http://192.168.10.200:80/feeder/{}/0'.format(i[0]))
@@ -137,36 +137,36 @@ if __name__ == '__main__':
                                 if state_b==['close','close','close','close']:
                                     if index ==0:
                                         state_b[v[0]]='open'
-                                        #response2=urllib.request.urlopen('http://192.168.10.201:80/feeder/{}/1'.format(v[0]))
+                                        #response2=urllib.request.urlopen('http://192.168.10.201:5000/feeder/{}/1'.format(v[0]))
                                         #html2=response2.read()
                                         #text2=json.loads(html2)
                                         print('http://192.168.10.201:80/feeder/{}/1'.format(v[0]))
                                 elif state_b[v[0]]=='open':
                                     if index ==2:
                                         state_b[v[0]]='close'
-                                        #response3=urllib.request.urlopen('http://192.168.10.201:80/feeder/{}/0'.format(v[0]))
+                                        #response3=urllib.request.urlopen('http://192.168.10.201:5000/feeder/{}/0'.format(v[0]))
                                         #html3=response3.read()
                                         #text3=json.loads(html3)
                                         print('http://192.168.10.201:80/feeder/{}/0'.format(v[0]))
                         if size0+70<=pos[0]<=size0+160 and 490<=pos[1]<=580:
                             if index == 0:
-                                response4=urllib.request.urlopen("http://192.168.10.200:80/feederon")
+                                response4=urllib.request.urlopen("http://192.168.10.200:5000/feederon")
                                 html4=response4.read()
                                 text4=json.loads(html4)
                                 print(text4['status'])
                             elif index==2:
-                                response5=urllib.request.urlopen("http://192.168.10.200:80/feederoff")
+                                response5=urllib.request.urlopen("http://192.168.10.200:5000/feederoff")
                                 html5=response5.read()
                                 text5=json.loads(html5)
                                 print(text5['status'])
                         elif size0*6+70<=pos[0]<=size0*6+160 and 490<=pos[1]<=580:
                             if index == 0:
-                                response6=urllib.request.urlopen("http://192.168.10.201:80/feederon")
+                                response6=urllib.request.urlopen("http://192.168.10.201:5000/feederon")
                                 html6=response6.read()
                                 text6=json.loads(html6)
                                 print(text6['status'])
                             elif index==2:
-                                response7=urllib.request.urlopen("http://192.168.10.201:80/feederoff")
+                                response7=urllib.request.urlopen("http://192.168.10.201:5000/feederoff")
                                 html7=response7.read()
                                 text7=json.loads(html7)
                                 print(text7['status'])
@@ -175,9 +175,9 @@ if __name__ == '__main__':
         html8=response8.read().decode()
         response9=urllib.request.urlopen("http://192.168.0.101:80/bucketgroup/b")
         html9=response9.read().decode()
-        response10=urllib.request.urlopen("http://192.168.0.101:80/scale/a")
+        response10=urllib.request.urlopen("http://192.168.10.200:5000/scale")
         html10=response10.read()
-        response11=urllib.request.urlopen("http://192.168.0.101:80/scale/b")
+        response11=urllib.request.urlopen("http://192.168.10.201:5000/scale")
         html11=response11.read()
         text8=json.loads(html8)
         text9=json.loads(html9)
