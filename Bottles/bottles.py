@@ -193,6 +193,8 @@ if __name__ == '__main__':
         for v in B1:
             Bottles.Icon_b(v[0],v[1],v[2],v[3])
         Bottles.VibratoryFeeder(size0+70,370,'img/lx.jpg')
-        Bottles. WeightIcon(size0+70,490,b'%0.2f' % text10['reading'])
+        Bottles. WeightIcon(size0+70,490,b'%0.2f' % text10)
+        #Bottles. WeightIcon(size0+70,490,b'%0.2f' % text10['reading'])
         Bottles.VibratoryFeeder(size0*6+70,370,'img/zd.jpg')
-        Bottles. WeightIcon(size0*6+70,490,b'%0.2f' % text11['reading'])
+        Bottles. WeightIcon(size0*6+70,490,b'%0.2f' % text11)
+        #Bottles. WeightIcon(size0*6+70,490,b'%0.2f' % text11['reading'])
