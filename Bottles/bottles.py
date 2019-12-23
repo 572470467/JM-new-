@@ -17,7 +17,7 @@ os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67,27)
 state='closey'
 state_a=['close','close','close','close','close']
 state_b=['close','close','close','close']
-line=['http://192.168.10.200:5000/measure/{0}/{1}','http://192.168.10.201:5000/measure/{0}/{1}']
+line=['http://19.168.10.200:5000/measure/{0}/{1}','http://192.168.10.201:5000/measure/{0}/{1}']
 Brack=[0,0,0]
 White=[255,255,255]
 Red=[255,0,0]
@@ -37,14 +37,14 @@ text=pygame.font.SysFont("arial",24)
 text1=pygame.font.SysFont("arial",16)
 screen.fill(Brack)
 class Bottles(object):
-    def Icon_a(num,x,y,a): 
+    def Icon_a(num,x,y,a):  
         img=pygame.image.load(icon[a])
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
         text_fmt0=text.render(number_a[num],3,White)
         screen.blit(text_fmt0,(x-50,y+25))
-        pygame.display.update()
-    def Icon_b(num,x,y,a):   
+        pygame.display.update() 
+    def Icon_b(num,x,y,a):    
         img=pygame.image.load(icon[a])
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
@@ -64,17 +64,17 @@ class Bottles(object):
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
         pygame.display.update()
-    def AN(num,x,y,a): 
+    def AN(num,x,y,a):  
         pygame.draw.rect(screen,color0[num],[x,y,82,35],0)
         text_fmt0=text1.render(a,3,Brack)
         screen.blit(text_fmt0,(x+2,y+4))
         pygame.display.update()
-    def SJ(num,x,y,a):
+    def SJ(num,x,y,a): 
         text_fmt0=text1.render(a,3,White)
         screen.blit(text_fmt0,(x,y))
         pygame.draw.rect(screen,Green,[x,y+20,82,35],2)
         pygame.display.update()    
-    def csv(num,n):  
+    def csv():   
         root=tkinter.Tk()
         root.withdraw()
         default_dir= r"C:\Users\lenovo\Desktop\Bottles"  
@@ -88,6 +88,14 @@ class Bottles(object):
             root=tkinter.Tk()
             root.withdraw()
             response=urllib.request.urlopen(line[num].format(t[0],t[1]))
+            print(line[num].format(t[0],t[1]))
+        color0[n]=Green
+    def State(num,n):    #多线程
+        threads=[]
+        threads.append(threading.Thread(target=Bottles.csv))
+        for t in threads:
+            t.daemon = True
+            t.start()
 if __name__ == '__main__':
     while True:
         pygame.draw.rect(screen,Red,[size0*3+60,315,size0+110,100],2)
@@ -105,14 +113,40 @@ if __name__ == '__main__':
                     if pressed_array[index]:
                         for t in list:
                             if t[1]<=pos[0]<=t[1]+82 and t[2]<=pos[1]<=t[2]+35:
-                                if t[3]=='FT_lifter' or t[3]=='FT_base':
-                                    num=0
-                                    n=t[0]
-                                    Bottles.csv(num,n)
-                                elif t[3]=='ML_lifter' or t[3]=='ML_base':
-                                    num=1
-                                    n=t[0]
-                                    Bottles.csv(num,n)
+                                if color0[t[0]]==Green:
+                                    color0[t[0]]=Red
+                                    if t[3]=='FT_lifter' or t[3]=='ML_lifter':
+                                        color0[1]=Gray
+                                        color0[3]=Gray
+                                        if t[3]=='FT_lifter':
+                                            num=0
+                                            n=t[0]
+                                            Bottles.State(num,n)
+                                        elif t[3]=='ML_lifter':
+                                            num=1
+                                            n=t[0]
+                                            Bottles.State(num,n)
+                                    elif t[3]=='FT_base' or t[3]=='ML_base':
+                                        color0[0]=Gray
+                                        color0[2]=Gray
+                                        if t[3]=='FT_base':
+                                            num=0
+                                            n=t[0]
+                                            Bottles.State(num,n)
+                                        elif t[3]=='ML_base':
+                                            num=1
+                                            n=t[0]
+                                            Bottles.State(num,n) 
+                                    elif t[3]=='   PAUSE' or t[3]=='   STOP':
+                                        color0[0:4]=[Green,Green,Green,Green]
+                                elif color0[t[0]]==Red:
+                                    color0[t[0]]=Green
+                            elif color0[0]==Green and color0[2]==Green:
+                                color0[1]=Green
+                                color0[3]=Green
+                            elif color0[1]==Green and color0[3]==Green:
+                                color0[0]=Green
+                                color0[2]=Green
                         for i in B0:
                             if i[1]<=pos[0]<=i[1]+90 and i[2]<=pos[1]<=i[2]+90:
                                 if state_a==['close','close','close','close','close']:
