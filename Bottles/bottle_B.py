@@ -118,9 +118,11 @@ if __name__ == '__main__':
                                     if color0[t[0]]==Green:
                                         color0[t[0]]=Red
                                         name=' CLOSE'
+                                        #response=urllib.request.urlopen("http://192.168.10.201:5000/valve/1")          
                                     elif color0[t[0]]==Red:
                                         color0[t[0]]=Green
                                         name='  OPEN'
+                                        #response=urllib.request.urlopen("http://192.168.10.201:5000/valve/0")          
                         for v in B1:
                             if v[1]<=pos[0]<=v[1]+90 and v[2]<=pos[1]<=v[2]+90:
                                 if state_b==['close','close','close','close']:
