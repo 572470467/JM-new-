@@ -1,3 +1,4 @@
+
 #coding = utf-8 
 import time
 from tkinter import*
@@ -16,24 +17,27 @@ pygame.init()
 state='closey'
 state_a=['close','close','close','close','close']
 state_b=['close','close','close','close']
-line=['http://192.168.10.200:5000/measure/{0}/{1}','http://192.168.10.201:5000/measure/{0}/{1}']
+line=['http://192.168.101.200:5000/measure/{0}/{1}','http://192.168.10.201:5000/measure/{0}/{1}']
 Brack=[0,0,0]
 White=[255,255,255]
 Red=[255,0,0]
 Green=[0,255,0]
 Gray=[169,169,169]
-width=pygame.display.Info().current_w
-height=pygame.display.Info().current_h
+width=1360
+height=768
+name='  OPEN'
+#width=pygame.display.Info().current_w
+#height=pygame.display.Info().current_h
 height0=int((height-117)/3)
-size=int((width-67)/2)
+size=int((width-67)/3)
 size0=(width-67)/9
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67+size,27)
-color0=[Green,Green,Green,Green,Green,Green]
+color0=[Green,Green,Green]
 number_a=["A0","A1","A2","A3","A4"]
 number_b=["B0","B1","B2","B3"]
 icon={'00':'kz.jpg','10':'bz.jpg','11':'mz.jpg','01':'gz.jpg'}
 #screen = pygame.display.set_mode((width-67,height0))
-screen = pygame.display.set_mode((size,640))
+screen = pygame.display.set_mode((int((width-67)/3),height))
 text=pygame.font.SysFont("arial",24)
 text1=pygame.font.SysFont("arial",16)
 screen.fill(Brack)
@@ -49,9 +53,9 @@ class Bottles(object):
         img=pygame.image.load('cz0.jpg')
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
-        pygame.draw.rect(screen,Brack,[x+130,y+30,size0-40,30],0)
+        pygame.draw.rect(screen,Brack,[x+100,y+30,size0-60,30],0)
         text_fmt0=text.render(a,3,White)
-        screen.blit(text_fmt0,(x+130,y+30))
+        screen.blit(text_fmt0,(x+100,y+30))
         pygame.display.update()
     def VibratoryFeeder(x,y,a): 
         img=pygame.image.load(a)
@@ -59,7 +63,7 @@ class Bottles(object):
         screen.blit(img,(x,y))
         pygame.display.update()
     def AN(num,x,y,a):  
-        pygame.draw.rect(screen,color0[num],[x,y,82,35],0)
+        pygame.draw.rect(screen,color0[num],[x,y,72,35],0)
         text_fmt0=text1.render(a,3,Brack)
         screen.blit(text_fmt0,(x+2,y+4))
         pygame.display.update()
@@ -104,11 +108,19 @@ if __name__ == '__main__':
                     if pressed_array[index]:
                         for t in list:
                             if t[1]<=pos[0]<=t[1]+82 and t[2]<=pos[1]<=t[2]+35:
-                                num=1
-                                n=t[0]
-                                if color0[t[0]]==Green:
-                                    color0[t[0]]=Red
-                                    Bottles.State(num,n)
+                                if t[3]=='ML_lifter' or t[3]=='ML_base':
+                                    if color0[t[0]]==Green:
+                                        color0[t[0]]=Red
+                                        num=1
+                                        n=t[0]
+                                        Bottles.State(num,n)
+                                elif t[0]==2:
+                                    if color0[t[0]]==Green:
+                                        color0[t[0]]=Red
+                                        name=' CLOSE'
+                                    elif color0[t[0]]==Red:
+                                        color0[t[0]]=Green
+                                        name='  OPEN'
                         for v in B1:
                             if v[1]<=pos[0]<=v[1]+90 and v[2]<=pos[1]<=v[2]+90:
                                 if state_b==['close','close','close','close']:
@@ -125,7 +137,7 @@ if __name__ == '__main__':
                                         #html3=response3.read()
                                         #text3=json.loads(html3)
                                         print('http://192.168.10.201:5000/feeder/{}/0'.format(v[0]))
-                        if size0*6+70-size+70<=pos[0]<=size0*6+160-size+70 and 490<=pos[1]<=580:
+                        if size0*2-70<=pos[0]<=size0*2+20 and 490<=pos[1]<=580:
                             if index == 0:
                                 response6=urllib.request.urlopen("http://192.168.10.201:5000/feederon")
                                 html6=response6.read()
@@ -141,11 +153,11 @@ if __name__ == '__main__':
         html11=response11.read()
         text9=json.loads(html9)
         text11=json.loads(html11)
-        B1=[[0,size0*5+70-size+70,160,text9['0']],[1,size0*5+70-size+70,30,text9['1']],[2,size0*7+70-size+70,160,text9['2']],[3,size0*7+70-size+70,30,text9['3']]]
-        list=[[2,size0*4+80-size+70,350,'ML_lifter'],[3,size0*4+80-size+70,470,'ML_base']]
+        B1=[[0,size0-70,160,text9['0']],[1,size0-70,30,text9['1']],[2,size0*3-110,160,text9['2']],[3,size0*3-110,30,text9['3']]]
+        list=[[0,size0-120,370,'ML_lifter'],[1,size0-120,490,'ML_base'],[2,size0*2-60,640,name]]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for v in B1:
             Bottles.Icon_b(v[0],v[1],v[2],v[3])
-        Bottles.VibratoryFeeder(size0*6+70-size+70,370,'zd.jpg')
-        Bottles.WeightIcon(size0*6+70-size+70,490,b'%0.2f' % text11)
+        Bottles.VibratoryFeeder(size0*2-70,370,'zd.jpg')
+        Bottles.WeightIcon(size0*2-70,490,b'%0.2f' % text11)
