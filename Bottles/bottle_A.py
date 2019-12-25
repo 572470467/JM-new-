@@ -118,10 +118,11 @@ if __name__ == '__main__':
                                     if color0[t[0]]==Green:
                                         color0[t[0]]=Red
                                         name=' CLOSE'
-                                        
+                                        #response=urllib.request.urlopen("http://192.168.10.200:5000/valve/1")          
                                     elif color0[t[0]]==Red:
                                         color0[t[0]]=Green
                                         name='  OPEN'
+                                        #response=urllib.request.urlopen("http://192.168.10.200:5000/valve/0")          
                         for i in B0:
                             if i[1]<=pos[0]<=i[1]+90 and i[2]<=pos[1]<=i[2]+90:
                                 if state_a==['close','close','close','close','close']:
@@ -138,7 +139,7 @@ if __name__ == '__main__':
                                         #html1=response1.read()
                                         #text1=json.loads(html1)
                                         print('http://192.168.10.200:5000/feeder/{}/0'.format(i[0]))
-                        if size0<=pos[0]<=size0+90 and 490<=pos[1]<=580:
+                        if size0<=pos[0]<=size0+90 and 370<=pos[1]<=460:
                             if index == 0:
                                 response4=urllib.request.urlopen("http://192.168.10.200:5000/feederon")
                                 html4=response4.read()
