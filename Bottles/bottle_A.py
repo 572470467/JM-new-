@@ -23,16 +23,19 @@ White=[255,255,255]
 Red=[255,0,0]
 Green=[0,255,0]
 Gray=[169,169,169]
-width=pygame.display.Info().current_w
-height=pygame.display.Info().current_h
+width=1360
+height=768
+name='  OPEN'
+#width=pygame.display.Info().current_w
+#height=pygame.display.Info().current_h
 height0=int((height-117)/3)
 size0=(width-67)/9
-color0=[Green,Green,Green,Green,Green,Green]
+color0=[Green,Green,Green]
 number_a=["A0","A1","A2","A3","A4"]
 number_b=["B0","B1","B2","B3"]
 icon={'00':'kz.jpg','10':'bz.jpg','11':'mz.jpg','01':'gz.jpg'}
 #screen = pygame.display.set_mode((width-67,height0))
-screen = pygame.display.set_mode((int((width-67)/2),640))
+screen = pygame.display.set_mode((int((width-67)/3),height))
 text=pygame.font.SysFont("arial",24)
 text1=pygame.font.SysFont("arial",16)
 screen.fill(Brack)
@@ -48,9 +51,9 @@ class Bottles(object):
         img=pygame.image.load('cz0.jpg')
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
-        pygame.draw.rect(screen,Brack,[x+130,y+30,size0-40,30],0)
+        pygame.draw.rect(screen,Brack,[x+100,y+30,size0-60,30],0)
         text_fmt0=text.render(a,3,White)
-        screen.blit(text_fmt0,(x+130,y+30))
+        screen.blit(text_fmt0,(x+100,y+30))
         pygame.display.update()
     def VibratoryFeeder(x,y,a): 
         img=pygame.image.load(a)
@@ -58,7 +61,7 @@ class Bottles(object):
         screen.blit(img,(x,y))
         pygame.display.update()
     def AN(num,x,y,a):  
-        pygame.draw.rect(screen,color0[num],[x,y,82,35],0)
+        pygame.draw.rect(screen,color0[num],[x,y,72,35],0)
         text_fmt0=text1.render(a,3,Brack)
         screen.blit(text_fmt0,(x+2,y+4))
         pygame.display.update()
@@ -66,8 +69,8 @@ class Bottles(object):
         text_fmt0=text1.render(a,3,White)
         screen.blit(text_fmt0,(x,y))
         pygame.draw.rect(screen,Green,[x,y+20,82,35],2)
-        pygame.display.update()    
-    def PF():   
+        pygame.display.update()
+    def PF():
         root=tkinter.Tk()
         root.withdraw()
         default_dir= r"C:\Users\lenovo\Desktop\Bottles"  
@@ -84,7 +87,7 @@ class Bottles(object):
             print(line[num].format(t[0],t[1]))
         color0[n]=Green
         mainloop()
-    def State(num,n):    #多线程
+    def State(num,n):   
         threads=[]
         threads.append(threading.Thread(target=Bottles.PF))
         for t in threads:
@@ -105,11 +108,20 @@ if __name__ == '__main__':
                     if pressed_array[index]:
                         for t in list:
                             if t[1]<=pos[0]<=t[1]+82 and t[2]<=pos[1]<=t[2]+35:
-                                if color0[t[0]]==Green:
-                                    color0[t[0]]=Red
-                                    num=0
-                                    n=t[0]
-                                    Bottles.State(num,n)
+                                if t[3]=='FT_lifter' or t[3]=='FT_base':
+                                    if color0[t[0]]==Green:
+                                        color0[t[0]]=Red
+                                        num=0
+                                        n=t[0]
+                                        Bottles.State(num,n)
+                                elif t[0]==2:
+                                    if color0[t[0]]==Green:
+                                        color0[t[0]]=Red
+                                        name=' CLOSE'
+                                        
+                                    elif color0[t[0]]==Red:
+                                        color0[t[0]]=Green
+                                        name='  OPEN'
                         for i in B0:
                             if i[1]<=pos[0]<=i[1]+90 and i[2]<=pos[1]<=i[2]+90:
                                 if state_a==['close','close','close','close','close']:
@@ -126,7 +138,7 @@ if __name__ == '__main__':
                                         #html1=response1.read()
                                         #text1=json.loads(html1)
                                         print('http://192.168.10.200:5000/feeder/{}/0'.format(i[0]))
-                        if size0+70<=pos[0]<=size0+160 and 490<=pos[1]<=580:
+                        if size0<=pos[0]<=size0+90 and 490<=pos[1]<=580:
                             if index == 0:
                                 response4=urllib.request.urlopen("http://192.168.10.200:5000/feederon")
                                 html4=response4.read()
@@ -136,17 +148,17 @@ if __name__ == '__main__':
                                 html5=response5.read()
                                 text5=json.loads(html5)
         time.sleep(1/3)
-        response8=urllib.request.urlopen("http://192.168.10.109:80/bucketgroup/a")
+        response8=urllib.request.urlopen("http://192.168.10.119:80/bucketgroup/a")
         html8=response8.read().decode()
-        response10=urllib.request.urlopen("http://192.168.10.200:80/scale")
+        response10=urllib.request.urlopen("http://192.168.10.200:5000/scale")
         html10=response10.read()
         text8=json.loads(html8)
         text10=json.loads(html10)
-        B0=[[0,70,160,text8['0']],[1,70,30,text8['1']],[2,size0*2+70,240,text8['2']],[3,size0*2+70,120,text8['3']],[4,size0*2+70,0,text8['4']]]
-        list=[[0,size0*3+80,350,'FT_lifter'],[1,size0*3+80,470,'FT_base']]
+        B0=[[0,70,160,text8['0']],[1,70,30,text8['1']],[2,size0*2+20,240,text8['2']],[3,size0*2+20,120,text8['3']],[4,size0*2+20,0,text8['4']]]
+        list=[[0,size0*3-100,370,'FT_lifter'],[1,size0*3-100,490,'FT_base'],[2,size0+10,640,name]]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for i in B0:
             Bottles.Icon_a(i[0],i[1],i[2],i[3])
-        Bottles.VibratoryFeeder(size0+70,370,'lx.jpg')
-        Bottles.WeightIcon(size0+70,490,b'%0.2f' % text10)
+        Bottles.VibratoryFeeder(size0,370,'lx.jpg')
+        Bottles.WeightIcon(size0,490,b'%0.2f' % text10)
