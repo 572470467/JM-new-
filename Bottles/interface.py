@@ -104,14 +104,11 @@ if __name__ == '__main__':
         if color0==[Green,Green,Green,Green,Green]:
             if button_text==["begin","begin","begin","begin","begin","begin","begin"]:
                 response2=urllib.request.urlopen('http://192.168.10.108:5000/carrier/status')
-                html2=response2.read()
-                text2=json.loads(html2)
+                html2=response2.read().decode()
             elif button_text!=["begin","begin","begin","begin","begin","begin","begin"]:
-                text2={'pos': 0, 'sensors': [0, 1, 1, 1, 1]}
-            a=text2['sensors']
-            b=text2['pos']
-            C=[[0,size+32,426,a[0],color0[0]],[1,size+102,426,a[1],color0[1]],[2,size+172,426,a[2],color0[2]],[3,size+242,426,a[3],color0[3]],[4,size+312,426,a[4],color0[4]]]
-            State_C(b)
+                html2={'pos': 0, 'sensors': [0, 1, 1, 1, 1]}
+            C=[[0,size+32,426,int(html2[23]),color0[0]],[1,size+102,426,int(html2[26]),color0[1]],[2,size+172,426,int(html2[29]),color0[2]],[3,size+242,426,int(html2[32]),color0[3]],[4,size+312,426,int(html2[35]),color0[4]]]
+            State_C(int(html2[8]))
             for v in C:
                 Station(v[0],v[1],v[2],v[3],v[4])
         for event in pygame.event.get():
