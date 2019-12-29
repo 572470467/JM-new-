@@ -5,6 +5,7 @@ import threading
 import json
 import os
 import sys
+name='  OPEN'
 import socket
 import csv ,sys,operator
 import tkinter.filedialog
@@ -150,10 +151,8 @@ if __name__ == '__main__':
         html8=response8.read().decode()
         response10=urllib.request.urlopen("http://192.168.10.200:5000/scale")
         html10=response10.read()
-        text8=json.loads(html8)
         text10=json.loads(html10)
-        B0=[[0,70,160,str(text8[0][0])+str(text8[1][0])],[1,70,30,str(text8[0][1])+str(text8[1][1])],[2,size0*2+20,240,str(text8[0][2])+str(text8[1][2])],[3,size0*2+20,120,str(text8[0][3])+str(text8[1][3])],[4,size0*2+20,0,str(text8[0][4])+str(text8[1][4])]]
-        list=[[0,size0*3-100,370,'FT_lifter'],[1,size0*3-100,490,'FT_base'],[2,size0+10,640,name],[3,size0*3-100,610,'Reelect']]
+        B0=[[0,70,160,str(html8[2])+str(html8[19])],[1,70,30,str(html8[5])+str(html8[22])],[2,size0*2+20,240,str(html8[8])+str(html8[25])],[3,size0*2+20,120,str(html8[11])+str(html8[28])],[4,size0*2+20,0,str(html8[14])+str(html8[31])]]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for i in B0:
