@@ -151,9 +151,8 @@ if __name__ == '__main__':
         html9=response9.read().decode()
         response11=urllib.request.urlopen("http://192.168.10.201:5000/scale")
         html11=response11.read()
-        text9=json.loads(html9)
         text11=json.loads(html11)
-        B1=[[0,size0-70,160,str(text9[0][0])+str(text9[1][0])],[1,size0-70,30,str(text9[0][1])+str(text9[1][1])],[2,size0*3-110,160,str(text9[0][2])+str(text9[1][2])],[3,size0*3-110,30,str(text9[0][3])+str(text9[1][3])]]
+        B1=[[0,size0-70,160,str(html9[2])+str(html9[16])],[1,size0-70,30,str(html9[5])+str(html9[19])],[2,size0*3-110,160,str(html9[8])+str(html9[22])],[3,size0*3-110,30,str(html9[11])+str(html9[25])]]
         list=[[0,size0-120,370,'ML_lifter'],[1,size0-120,490,'ML_base'],[2,size0*2-60,640,name],[3,size0-120,610,'Reelect']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
