@@ -9,18 +9,21 @@ def button(groupid):
     if groupid=='000':
         return str(B.block00prepare())
     elif groupid=='100':
-        return str(B.block10powderon())
+        return str(B.reset_block00prepare())
     elif groupid=='200':
-        return str(B.block20powderoff())
+        return str(B.block10powderon())
     elif groupid=='300':
-        return str(B.block30feedandscreen())
+        return str(B.block20powderoff())
     elif groupid=='400':
-        return str(B.block40stopandreset())
+        return str(B.block30feedandscreen())
     elif groupid=='500':
-        return str(B.block50abrasiveson())
+        return str(B.block40stopandreset())
     elif groupid=='600':
+        return str(B.block50abrasiveson())
+    elif groupid=='700':
         return str(B.block60abrasivesoff())
-
+    elif groupid=='800':
+        return str(B.erialtest())
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = True)
 
