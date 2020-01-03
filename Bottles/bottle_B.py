@@ -14,9 +14,6 @@ from pygame.locals import *
 import urllib.request
 from pygame.color import THECOLORS
 pygame.init()
-state='closey'
-state_a=['close','close','close','close','close']
-state_b=['close','close','close','close']
 Brack=[0,0,0]
 White=[255,255,255]
 Red=[255,0,0]
@@ -30,7 +27,6 @@ size=int((width-67)/3)
 size0=(width-67)/9
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67+size,27)
 color0=[Green,Green,Green,Green]
-number_a=["A0","A1","A2","A3","A4"]
 number_b=["B0","B1","B2","B3"]
 icon={'11':'kz.jpg','01':'bz.jpg','00':'mz.jpg','10':'gz.jpg'}
 screen = pygame.display.set_mode((int((width-67)/3),height))
@@ -73,14 +69,14 @@ class Bottles(object):
         root.withdraw()
         fname= tkinter.filedialog.askopenfilename(title=u"Select formula",initialdir=num)
         f=open(fname)
+        next(f)
         reader=csv.reader(f)
         lt=[]
         for a in reader:
             lt.append(a)
         for t in lt:
-            root.withdraw()
-            response=urllib.request.urlopen('http://192.168.10.201:5000/measure/{0}/{1}'.format(t[0],t[1]))
-            print('http://192.168.10.201:5000/measure/{0}/{1}'.format(t[0],t[1]))
+            response=urllib.request.urlopen('http://192.168.10.201:5000/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
+            print('http://192.168.10.201:5000/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
         color0[n]=Green
         mainloop()
     def State(num,n):
@@ -121,32 +117,6 @@ if __name__ == '__main__':
                                         color0[t[0]]=Green
                                         name='  OPEN'
                                         response=urllib.request.urlopen("http://192.168.10.201:5000/valve/0")
-                        #for v in B1:
-                        #    if v[1]<=pos[0]<=v[1]+90 and v[2]<=pos[1]<=v[2]+90:
-                        #        if state_b==['close','close','close','close']:
-                        #            if index ==0:
-                        #                state_b[v[0]]='open'
-                                        #response2=urllib.request.urlopen('http://192.168.10.201:5000/feeder/{}/1'.format(v[0]))
-                                        #html2=response2.read()
-                                        #text2=json.loads(html2)
-                        #                print('http://192.168.10.201:5000/feeder/{}/1'.format(v[0]))
-                        #        elif state_b[v[0]]=='open':
-                        #            if index ==2:
-                        #                state_b[v[0]]='close'
-                                        #response3=urllib.request.urlopen('http://192.168.10.201:5000/feeder/{}/0'.format(v[0]))
-                                        #html3=response3.read()
-                                        #text3=json.loads(html3)
-                        #                print('http://192.168.10.201:5000/feeder/{}/0'.format(v[0]))
-                        #if size0*2-70<=pos[0]<=size0*2+20 and 370<=pos[1]<=460:
-                        #    if index == 0:
-                        #        response6=urllib.request.urlopen("http://localhost:80/feederon/b")
-                        #        html6=response6.read()
-                        #        text6=json.loads(html6)
-                        #    elif index==2:
-                        #        response7=urllib.request.urlopen("http://localhost:80/feederoff/b")
-                        #        html7=response7.read()
-                        #        text7=json.loads(html7)
-        time.sleep(1/3)
         response9=urllib.request.urlopen("http://192.168.10.201:5000/level")
         html9=response9.read().decode()
         response11=urllib.request.urlopen("http://192.168.10.201:5000/scale")
