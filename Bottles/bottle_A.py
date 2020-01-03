@@ -100,7 +100,7 @@ if __name__ == '__main__':
                 pressed_array = pygame.mouse.get_pressed()
                 pos = pygame.mouse.get_pos()
                 for index in range(len(pressed_array)):
-                    if pressed_array[index]:
+                    if pressed_array[index]:        time.sleep(1/3)
                         for t in list:
                             if t[1]<=pos[0]<=t[1]+82 and t[2]<=pos[1]<=t[2]+35:
                                 if t[3]=='FT_lifter' or t[3]=='FT_base':
@@ -146,7 +146,6 @@ if __name__ == '__main__':
                         #        response5=urllib.request.urlopen("http://localhost:80/feederoff/a")
                         #        html5=response5.read()
                         #        text5=json.loads(html5)
-        time.sleep(1/3)
         response8=urllib.request.urlopen("http://192.168.10.200:5000/level")
         html8=response8.read().decode()
         response10=urllib.request.urlopen("http://192.168.10.200:5000/scale")
@@ -159,4 +158,4 @@ if __name__ == '__main__':
         for i in B0:
             Bottles.Icon_a(i[0],i[1],i[2],i[3])
         Bottles.VibratoryFeeder(size0,370,'lx.jpg')
-        Bottles.WeightIcon(size0,490,b'%0.2f' % text10['reading'])
+        Bottles.WeightIcon(size0,490,b'%0.2f' % text10)
