@@ -159,5 +159,5 @@ if __name__ == '__main__':
         for v in B1:
             Bottles.Icon_b(v[0],v[1],v[2],v[3])
         Bottles.VibratoryFeeder(size0*2-70,370,'zd.jpg')
-        Bottles.WeightIcon(size0*2-70,490,b'%0.2f' % text11['reading']
+        Bottles.WeightIcon(size0*2-70,490,b'%0.2f' % text11)
 
