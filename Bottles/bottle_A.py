@@ -73,8 +73,8 @@ class Bottles(object):
         for a in reader:
             lt.append(a)
         for t in lt:
-            response=urllib.request.urlopen('http://localhost:80/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
-            print('http://localhost:80/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
+            response=urllib.request.urlopen('http://192.168.10.200:5000/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
+            print('http://192.168.10.200:5000/measure/{0}/{1}'.format(t[0],round(float(t[1])-float(t[2]),2)))
         color0[n]=Green
         mainloop()
     def State(num,n):   
