@@ -24,7 +24,7 @@ Gray=[169,169,169]
 width=pygame.display.Info().current_w
 height=pygame.display.Info().current_h
 size0=(width-67)/9
-color0=[Green,Green,Green,Green]
+color0=[Green,Green,Green,Green,Green]
 number_a=["A0","A1","A2","A3","A4"]
 icon={'11':'kz.jpg','01':'bz.jpg','00':'mz.jpg','10':'gz.jpg'}
 screen = pygame.display.set_mode((int((width-67)/3),height))
@@ -107,6 +107,8 @@ if __name__ == '__main__':
                                 elif t[3]=='Reelect':
                                     python=sys.executable
                                     os.execl(python,python,*sys.argv)
+                                elif t[3]=='  ZERO':
+                                    response=urllib.request.urlopen("http://192.168.10.200:5000/zerosclae")                                       
                                 elif t[0]==2:
                                     if color0[t[0]]==Green:
                                         color0[t[0]]=Red
@@ -122,7 +124,7 @@ if __name__ == '__main__':
         html10=response10.read()
         text10=json.loads(html10)
         B0=[[0,70,160,str(html8[2])+str(html8[19])],[1,70,30,str(html8[5])+str(html8[22])],[2,size0*2+20,240,str(html8[8])+str(html8[25])],[3,size0*2+20,120,str(html8[11])+str(html8[28])],[4,size0*2+20,0,str(html8[14])+str(html8[31])]]
-        list=[[0,size0*3-100,370,'FT_lifter'],[1,size0*3-100,490,'FT_base'],[2,size0+10,640,name],[3,size0*3-100,610,'Reelect']]
+        list=[[0,size0*3-100,370,'FT_lifter'],[1,size0*3-100,490,'FT_base'],[2,size0+10,640,name],[3,size0*3-100,610,'Reelect'],[4,size0-120,640,'  ZERO']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for i in B0:
