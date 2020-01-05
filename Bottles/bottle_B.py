@@ -26,7 +26,7 @@ height0=int((height-117)/3)
 size=int((width-67)/3)
 size0=(width-67)/9
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67+size,27)
-color0=[Green,Green,Green,Green]
+color0=[Green,Green,Green,Green,Green]
 number_b=["B0","B1","B2","B3"]
 icon={'11':'kz.jpg','01':'bz.jpg','00':'mz.jpg','10':'gz.jpg'}
 screen = pygame.display.set_mode((int((width-67)/3),height))
@@ -108,6 +108,8 @@ if __name__ == '__main__':
                                 elif t[3]=='Reelect':
                                     python=sys.executable
                                     os.execl(python,python,*sys.argv)
+                                elif t[3]=='  ZERO':
+                                    response=urllib.request.urlopen("http://192.168.10.201:5000/zerosclae")                                    
                                 elif t[0]==2:
                                     if color0[t[0]]==Green:
                                         color0[t[0]]=Red
@@ -123,7 +125,7 @@ if __name__ == '__main__':
         html11=response11.read()
         text11=json.loads(html11)
         B1=[[0,size0-70,160,str(html9[2])+str(html9[16])],[1,size0-70,30,str(html9[5])+str(html9[19])],[2,size0*3-110,160,str(html9[8])+str(html9[22])],[3,size0*3-110,30,str(html9[11])+str(html9[25])]]
-        list=[[0,size0-120,370,'ML_lifter'],[1,size0-120,490,'ML_base'],[2,size0*2-60,640,name],[3,size0-120,610,'Reelect']]
+        list=[[0,size0-120,370,'ML_lifter'],[1,size0-120,490,'ML_base'],[2,size0*2-60,640,name],[3,size0-120,610,'Reelect'],[4,size0*3-130,640,'  ZERO']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
         for v in B1:
