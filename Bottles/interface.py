@@ -91,7 +91,6 @@ def Car(num):
         t.start()
 if __name__ == '__main__':
     while True:
-        time.sleep(1.5)
         pygame.draw.rect(screen,Brack,[size+70,482,100,28],0)
         pygame.draw.rect(screen,Green,[size+177,484,62,25],0)
         button1=text_1.render("switch",1,Brack)
