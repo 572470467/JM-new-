@@ -95,7 +95,7 @@ if __name__ == '__main__':
                 pressed_array = pygame.mouse.get_pressed()
                 pos = pygame.mouse.get_pos()
                 for index in range(len(pressed_array)):
-                    if pressed_array[index]:        time.sleep(1/3)
+                    if pressed_array[index]:       
                         for t in list:
                             if t[1]<=pos[0]<=t[1]+82 and t[2]<=pos[1]<=t[2]+35:
                                 if t[3]=='FT_lifter' or t[3]=='FT_base':
