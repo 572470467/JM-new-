@@ -111,8 +111,8 @@ if __name__ == '__main__':
                 State_C(int(html2[8]))
             elif html2[7:9]=='-1':
                 C=[[0,size+32,558,int(html2[24]),color0[0]],[1,size+102,558,int(html2[27]),color0[1]],[2,size+172,558,int(html2[30]),color0[2]],[3,size+242,558,int(html2[33]),color0[3]],[4,size+312,558,int(html2[36]),color0[4]]]
-                State_C(int(html2[9]))
                 pygame.draw.rect(screen,Brack,[size,593,400,50],0)
+                pygame.draw.rect(screen,Brack,[size,687,400,25],0)                
             for v in C:
                 Station(v[0],v[1],v[2],v[3],v[4])
         for event in pygame.event.get():
