@@ -20,7 +20,7 @@ button_text=["begin","begin","begin","begin","begin","begin","begin","begin","be
 line=['http://192.168.10.117:5000/mixer/000','http://192.168.10.117:5000/mixer/100','http://192.168.10.117:5000/mixer/200','http://192.168.10.117:5000/mixer/300','http://192.168.10.117:5000/mixer/400','http://192.168.10.117:5000/mixer/500','http://192.168.10.117:5000/mixer/600','http://192.168.10.117:5000/mixer/700','http://192.168.10.117:5000/mixer/800']
 line0=['http://192.168.10.108:5000/carrier/moveto/0','http://192.168.10.108:5000/carrier/moveto/1','http://192.168.10.108:5000/carrier/moveto/2','http://192.168.10.108:5000/carrier/moveto/3','http://192.168.10.108:5000/carrier/moveto/4']
 CGQ=[[0,1,1,1,1],[1,0,1,1,1],[1,1,0,1,1],[1,1,1,0,1],[1,1,1,1,0]]
-list=['[0,1,1,1,1]','[1,0,1,1,1]','[1,1,0,1,1]','[1,1,1,0,1]','[1,1,1,1,0]']
+list=[['0', '1', '1', '1', '1'],['1', '0', '1', '1', '1'],['1', '1', '0', '1', '1'],['1', '1', '1', '0', '1'],['1', '1', '1', '1', '0']]
 color=[Green,Green,Green,Green,Green,Green,Green,Green,Green]
 color0=[Green,Green,Green,Green,Green]
 button_text0="manual:"
@@ -95,6 +95,8 @@ def GZ():
     screen.blit(button,(size,720))        
 if __name__ == '__main__':
     while True:
+        pygame.draw.rect(screen,Brack,[size,593,400,50],0)
+        pygame.draw.rect(screen,Brack,[size,687,400,25],0)
         pygame.draw.rect(screen,Brack,[size,720,460,30],0)        
         pygame.draw.rect(screen,Brack,[size+70,482,100,28],0)
         pygame.draw.rect(screen,Green,[size+177,484,62,25],0)
@@ -111,17 +113,16 @@ if __name__ == '__main__':
                 html2=response2.read().decode()
             elif button_text!=["begin","begin","begin","begin","begin","begin","begin","begin","begin"]:
                 html2=str({'pos':0,'sensors':[0,1,1,1,1]})
-            if html2[7:9]!='-1':
-                C=[[0,size+32,558,int(html2[23]),color0[0]],[1,size+102,558,int(html2[26]),color0[1]],[2,size+172,558,int(html2[29]),color0[2]],[3,size+242,558,int(html2[32]),color0[3]],[4,size+312,558,int(html2[35]),color0[4]]]
-                State_C(int(html2[8]))
-                if html2[22:37] not in list:
-                    GZ()                
-            elif html2[7:9]=='-1':
-                C=[[0,size+32,558,int(html2[24]),color0[0]],[1,size+102,558,int(html2[27]),color0[1]],[2,size+172,558,int(html2[30]),color0[2]],[3,size+242,558,int(html2[33]),color0[3]],[4,size+312,558,int(html2[36]),color0[4]]]
-                pygame.draw.rect(screen,Brack,[size,593,400,50],0)
-                pygame.draw.rect(screen,Brack,[size,687,400,25],0)      
-                if html2[23:38]!='[1,1,1,1,1]':
-                    GZ()                
+            a=(html2[1:-1].split(': '))[2][1:-1].split(', ')
+            b=(html2[1:-1].split(', '))[0].split(': ')                
+            if b[1]!='-1':
+                State_C(int(b[1]))
+                if a not in list:
+                    GZ()
+            elif b[1]=='-1':
+                if a!=['1','1','1','1','1']:
+                    GZ()
+            C=[[0,size+32,558,int(a[0]),color0[0]],[1,size+102,558,int(a[1]),color0[1]],[2,size+172,558,int(a[2]),color0[2]],[3,size+242,558,int(a[3]),color0[3]],[4,size+312,558,int(a[4]),color0[4]]]
             for v in C:
                 Station(v[0],v[1],v[2],v[3],v[4])
         for event in pygame.event.get():
