@@ -24,6 +24,11 @@ def button(groupid):
         return str(B.block60abrasivesoff())
     elif groupid=='800':
         return str(B.erialtest())
+
+@app.route('/status')
+def op_mix_status():
+    return str(mix.getstatus())
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug = True)
 
