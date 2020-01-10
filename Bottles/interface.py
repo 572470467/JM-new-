@@ -95,14 +95,14 @@ def GZ():
     button=text_0.render(('Prompt:fault,manual intervention is needed!'),1,Red)
     screen.blit(button,(size,690))
 def CGQ(num,x,y,a):
-    pygame.draw.rect(screen,Brack,[x+20,y+90,25,25],0)
+    pygame.draw.rect(screen,Brack,[x+20,y+80,25,25],0)
     button=text_2.render(text1[num],1,White)
     screen.blit(button,(x-30,y+4))
     img=pygame.image.load('cgq.jpg')
     img=pygame.transform.smoothscale(img,(52,50))
     screen.blit(img,(x,y+30))
     button=text_0.render('{}'.format(a),1,White)
-    screen.blit(button,(x+20,y+90))
+    screen.blit(button,(x+20,y+80))
     pygame.display.update()       
 if __name__ == '__main__':
     while True:
