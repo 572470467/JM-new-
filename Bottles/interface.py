@@ -119,6 +119,13 @@ if __name__ == '__main__':
         html=response.read().decode()
         z=(html[1:-1].split(': '))[1][1:-1].split(', ')
         D=[[0,size+52,420,z[0]],[1,size+177,420,z[1]],[2,size+302,420,z[2]]]
+        if z[0]=='1':
+            color=[Gray,Green,Green,Green,Gray,Green,Green,Green,Green]
+        elif z[0]=='0':
+            if z[1]=='1':
+                color=[Green,Green,Green,Green,Green,Green,Green,Green,Green]
+            elif z[1]=='0':
+                color=[Green,Green,Green,Gray,Green,Green,Green,Green,Green]
         for k in D:
             CGQ(k[0],k[1],k[2],k[3])
         for i in B:
@@ -164,7 +171,7 @@ if __name__ == '__main__':
                                     color=[Gray,Gray,Gray,Gray,Gray,Gray,Gray,Gray,Gray]
                             for i in B:
                                 if i[1]+100<=pos[0]<=i[1]+165 and i[2]<=pos[1]<=i[2]+28:
-                                    if button_text==["begin","begin","begin","begin","begin","begin","begin","begin","begin"] and button_text0=="manual:":
+                                    if button_text==["begin","begin","begin","begin","begin","begin","begin","begin","begin"] and color[i[0]]==Green and button_text0=="manual:":
                                         color[i[0]]=Red
                                         num=i[0]
                                         button_text[i[0]]="end"
