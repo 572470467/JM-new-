@@ -127,8 +127,6 @@ if __name__ == '__main__':
             if button_text==["begin","begin","begin","begin","begin","begin","begin","begin","begin"]:
                 response2=urllib.request.urlopen('http://192.168.10.108:5000/carrier/status')
                 html2=response2.read().decode()
-            elif button_text!=["begin","begin","begin","begin","begin","begin","begin","begin","begin"]:
-                html2=str({'pos':0,'sensors':[0,1,1,1,1]})
             a=(html2[1:-1].split(': '))[2][1:-1].split(', ')
             b=(html2[1:-1].split(', '))[0].split(': ')                
             if b[1]!='-1':
