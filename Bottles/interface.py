@@ -60,12 +60,12 @@ def State_A():
     button_text[num]="begin"
     color[num]=Green
 def State_B():
-    for i in range(8):
+    for i in range(7):
         response=urllib.request.urlopen(line[i])
         button_text[i]="begin"
         button_text[i+1]="end"
-    response=urllib.request.urlopen(line[8])
-    button_text[8]="begin"
+    response=urllib.request.urlopen(line[7])
+    button_text[7]="begin"
 def State_C(num):
     pygame.draw.rect(screen,Brack,[size,573,400,50],0)
     pygame.draw.rect(screen,Brack,[size,667,400,25],0)
