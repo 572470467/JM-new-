@@ -94,7 +94,7 @@ def Car(num):
 def GZ():
     button=text_0.render(('Prompt:fault,manual intervention is needed!'),1,Red)
     screen.blit(button,(size,690))
-def mixer(num,x,y,a):
+def Mixer(num,x,y,a):
     pygame.draw.rect(screen,Brack,[x+20,y+80,25,25],0)
     button=text_2.render(text1[num],1,White)
     screen.blit(button,(x-30,y+4))
@@ -127,7 +127,7 @@ if __name__ == '__main__':
             elif z[1]=='0':
                 color=[Green,Green,Green,Gray,Green,Green,Green,Green,Green]
         for k in D:
-            mixer(k[0],k[1],k[2],k[3])
+            Mixer(k[0],k[1],k[2],k[3])
         for i in B:
             Process(i[0],i[1],i[2],i[3],i[4])
         if color0==[Green,Green,Green,Green,Green]:
