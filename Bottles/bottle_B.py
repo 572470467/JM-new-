@@ -121,10 +121,13 @@ if __name__ == '__main__':
                                         response=urllib.request.urlopen("http://192.168.10.201:5000/valve/0")
         response9=urllib.request.urlopen("http://192.168.10.201:5000/level")
         html9=response9.read().decode()
+        a=(html8[2:-3].split('], ['))[0].split(', ')
+        b=(html8[2:-3].split('], ['))[1].split(', ')
         response11=urllib.request.urlopen("http://192.168.10.201:5000/scale")
         html11=response11.read()
         text11=json.loads(html11)
-        B1=[[0,size0-70,160,str(html9[2])+str(html9[16])],[1,size0-70,30,str(html9[5])+str(html9[19])],[2,size0*3-110,160,str(html9[8])+str(html9[22])],[3,size0*3-110,30,str(html9[11])+str(html9[25])]]
+        B1=[[0,size0-70,160,str(a[0])+str(b[0])],[1,size0-70,30,str(a[1])+str(b[1]],[2,size0*3-110,160,str(a[2])+str(b[2])],[3,size0*3-110,30,str(a[3])+str(b[3])]]        
+        #B1=[[0,size0-70,160,str(html9[2])+str(html9[16])],[1,size0-70,30,str(html9[5])+str(html9[19])],[2,size0*3-110,160,str(html9[8])+str(html9[22])],[3,size0*3-110,30,str(html9[11])+str(html9[25])]]
         list=[[0,size0-120,370,'ML_lifter'],[1,size0-120,490,'ML_base'],[2,size0*2-60,640,name],[3,size0-120,610,'Reelect'],[4,size0*3-130,640,'  ZERO']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
