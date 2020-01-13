@@ -1,9 +1,13 @@
 from flask import Flask, jsonify
 import time
+import common
+from common import *
 import mixer
-GPIO.setmode(GPIO.BCM)
+from mixer import *
 
-# GPIO setup
+global pump0,pump1,valve_air_mix,mini_mix,mix_powder,mix_abrasives_on,mix_abrasives_off,vibrating_screen_powder,vibrating_screen_powder_rotate_cyli, upseal_cyli,downseal_cyli, up_avlv,down_avlv,hand_pump\
+0, hand_pump1, mix,btnc0,btnc1,btnc2
+
 pump0 = Relay(10)
 pump1 = Relay(22)
 
@@ -24,7 +28,8 @@ down_avlv =Relay(23)
 
 hand_pump0 = Button(13)
 hand_pump1 = Button(19)
-mix=Mixer([8,7,1])
+
+mix = Mixer([8,7,1])
 btnc0 = Button(8)
 btnc1 = Button(7)
 btnc2 = Button(1)
