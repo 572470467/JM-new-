@@ -16,7 +16,7 @@ height0=int((height-117)/3)
 size=(width-67)/20
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67,height0*2+87)
 #screen = pygame.display.set_mode((width-67,height0))
-screen = pygame.display.set_mode((width-67,640))
+screen = pygame.display.set_mode((width-67,height))
 screen.fill(Brack)
 pygame.display.update()
 icon0={'0':'cgq0.jpg','1':'cgq1.jpg'}
@@ -66,21 +66,21 @@ def Icon_cz(num,x,y,a):
     screen.blit(text_fmt0,(x+size+30,y+55))
     img=pygame.image.load('cz.jpg')
     img=pygame.transform.smoothscale(img,(int(size*0.8),70))
-    screen.blit(img,(x,y))
+    screen.blit(img,(x-20,y))
     img0=pygame.image.load('csd.jpg')
     img0=pygame.transform.smoothscale(img0,(int(size*0.8),70))
-    screen.blit(img0,(x,y-70))
+    screen.blit(img0,(x-20,y-70))
     pygame.display.update()
 def Icon_ryj(num,x,y,wd):
     pygame.draw.rect(screen,Green,[x,y,40,40],3)
     text_fmt0=text.render(number3[num],3,White)
     screen.blit(text_fmt0,(x+50,y+5))
     text_fmt1=text.render('温度:',3,White)
-    screen.blit(text_fmt1,(x+150,y+5))
-    pygame.draw.rect(screen,Brack,[x+202,y+2,63,33],0)
-    pygame.draw.rect(screen,Green,[x+200,y,65,35],2)
+    screen.blit(text_fmt1,(x+130,y+5))
+    pygame.draw.rect(screen,Brack,[x+182,y+2,63,33],0)
+    pygame.draw.rect(screen,Green,[x+180,y,65,35],2)
     text_fmt2=text.render('{}℃'.format(wd),3,White)
-    screen.blit(text_fmt2,(x+210,y+5))
+    screen.blit(text_fmt2,(x+190,y+5))
     pygame.display.update()
 def Icon_gd(x,y,l):
     pygame.draw.rect(screen,Green,[x,y,l,90],5)
@@ -104,26 +104,27 @@ if __name__ == '__main__':
         response1=urllib.request.urlopen('http://192.168.10.119:80/n/status/')
         html1=response1.read()
         text1=json.loads(html1)
-        response2=urllib.request.urlopen("http://192.168.10.200:80/scale")
+        response2=urllib.request.urlopen("http://192.168.10.200:5000/scale")
         html2=response2.read()
-        response3=urllib.request.urlopen("http://192.168.10.201:80/scale")
+        response3=urllib.request.urlopen("http://192.168.10.201:5000/scale")
         html3=response3.read()
         text2=json.loads(html2)
         text3=json.loads(html3)
-        A0=[[0,size*18-10,192,text0['sensor0']],[1,size*15+20,192,text0['sensor1']],[2,size*12+10,192,text0['sensor2']],[3,size+40,192,text0['sensor3']],[4,size+40,449,text1['sensor4']],[5,size*14-20,449,text1['sensor5']],[6,size*19,449,text1['sensor6']]]
+        A0=[[0,size*18-10,192,text0['sensor0']],[1,size*15+20,192,text0['sensor1']],[2,size*12+10,192,text0['sensor2']],[3,size+40,192,text0['sensor3']],[4,size+40,449,text1['sensor4']],[5,size*14-20,449,text1['sensor5']],[6,size*19-10,449,text1['sensor6']]]
         A1=[[0,size*11+30,106,text0['motor0']],[1,size*9-10,106,text0['motor1']],[2,size*7-10,106,text0['motor2']],[3,size*2+40,106,text0['motor3']],[4,size*7+40,539,text1['motor4']],[5,size*9+40,539,text1['motor5']],[6,size*13+20,539,text1['motor6']]]
-        A2=[[0,size*18-10,106],[1,size*18-10,20],[2,size*15+20,106],[3,size*15+20,20],[4,size*13-30,106],[5,size*10+10,192],[6,size*4,192]]
-        A3=[[0,size*18-10,329,b'%0.2f' % text2['reading']],[1,size*15+20,329,b'%0.2f' % text3['reading']]]
-        A4=[[0,size*2,265,lt[0][1]],[1,size*2,315,lt[1][1]],[2,size*2,365,lt[2][1]]]
+        A2=[[0,size*18-10,106],[1,size*18-10,25],[2,size*15+20,106],[3,size*15+20,25],[4,size*13-15,106],[5,size*10-10,192],[6,size*4,192]]
+        A3=[[0,size*18-10,329,b'%0.2f' % text2],[1,size*15+20,329,b'%0.2f' % text3]]
+        #A3=[[0,size*18-40,329,b'%0.2f' % text2['reading']],[1,size*15-30,329,b'%0.2f' % text3['reading']]]
+        A4=[[0,size*2-20,265,lt[0][1]],[1,size*2-20,315,lt[1][1]],[2,size*2-20,365,lt[2][1]]]
         A5=[[size*11+25,165,size*9-30],[size*13+10,165,0],[size*11+5,165,10],[size*4-15,165,size*7+30],[size+20,165,size*2+45],[size+20,420,size*9+20],[size*11-45,420,size*3-50],[size*13+5,420,size*7-10]]
         text_fmt0=text.render('预压机在压数量：',3,White)
-        screen.blit(text_fmt0,(size*6+5,285))
+        screen.blit(text_fmt0,(size*6-15,285))
         pygame.draw.rect(screen,Brack,[size*7+62,282,58,33],0)
         pygame.draw.rect(screen,Green,[size*7+60,280,60,35],2)
         text_fmt2=text.render('{}件'.format(ls[0][1]),3,White)
         screen.blit(text_fmt2,(size*7+65,285))
         text_fmt1=text.render('压出产品的数量：',3,White)
-        screen.blit(text_fmt1,(size*6+5,345))
+        screen.blit(text_fmt1,(size*6-15,345))
         pygame.draw.rect(screen,Brack,[size*7+62,342,58,33],0)
         pygame.draw.rect(screen,Green,[size*7+60,340,60,35],2)
         text_fmt3=text.render('{}件'.format(ls[1][1]),3,White)
