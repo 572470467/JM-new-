@@ -120,10 +120,13 @@ if __name__ == '__main__':
                                         response=urllib.request.urlopen("http://192.168.10.200:5000/valve/0")
         response8=urllib.request.urlopen("http://192.168.10.200:5000/level")
         html8=response8.read().decode()
+        a=(html8[2:-3].split('], ['))[0].split(', ')
+        b=(html8[2:-3].split('], ['))[1].split(', ')        
         response10=urllib.request.urlopen("http://192.168.10.200:5000/scale")
         html10=response10.read()
         text10=json.loads(html10)
-        B0=[[0,70,160,str(html8[2])+str(html8[19])],[1,70,30,str(html8[5])+str(html8[22])],[2,size0*2+20,240,str(html8[8])+str(html8[25])],[3,size0*2+20,120,str(html8[11])+str(html8[28])],[4,size0*2+20,0,str(html8[14])+str(html8[31])]]
+        B0=[[0,70,160,str(a[0])+str(b[0])],[1,70,30,str(a[1])+str(b[1])],[2,size0*2+20,240,str(a[2])+str(b[2])],[3,size0*2+20,120,str(a[3])+str(b[3])],[4,size0*2+20,0,str(a[4])+str(b[4])]]        
+        #B0=[[0,70,160,str(html8[2])+str(html8[19])],[1,70,30,str(html8[5])+str(html8[22])],[2,size0*2+20,240,str(html8[8])+str(html8[25])],[3,size0*2+20,120,str(html8[11])+str(html8[28])],[4,size0*2+20,0,str(html8[14])+str(html8[31])]]
         list=[[0,size0*3-100,370,'FT_lifter'],[1,size0*3-100,490,'FT_base'],[2,size0+10,640,name],[3,size0*3-100,610,'Reelect'],[4,size0-120,640,'  ZERO']]
         for t in list:
             Bottles.AN(t[0],t[1],t[2],t[3])
