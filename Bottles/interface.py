@@ -7,7 +7,7 @@ from pygame.locals import *
 import urllib.request
 from pygame.color import THECOLORS
 pygame.init()
-Brack=[0,0,0]
+Black=[0,0,0]
 White=[255,255,255]
 Green=[0,255,0]
 Red=[255,0,0]
@@ -30,7 +30,7 @@ Num=['0','1','2','3','4']
 B0=[size+32,size+102,size+172,size+242,size+312]
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67+(width-67)/3*2,27)
 screen = pygame.display.set_mode((int((width-67)/3),height))
-screen.fill(Brack)
+screen.fill(Black)
 text=["Power preparation:","Device reset:","Power tank open:","Power tank close:","Circular screen:","Stop and reset:","Grinding machine open:","Grinding machine close:","Order to test:"]
 text_0=pygame.font.SysFont("arial",24)
 text_1=pygame.font.SysFont("arial",20)
@@ -42,12 +42,12 @@ def Process(num,x,y,button_text,color):
     text_fmt1=text_1.render(text[num],1,White)
     screen.blit(text_fmt1,(x-127,y))
     pygame.draw.rect(screen,color,[x+100,y,65,28],0)
-    button=text_1.render(button_text,1,Brack)
+    button=text_1.render(button_text,1,Black)
     screen.blit(button,(x+113,y+3))
     pygame.display.update()
 def Station(num,x,y,a,color0):
     pygame.draw.rect(screen,color0,[x,y,65,28],0)
-    button=text_2.render(button_text1[num],1,Brack)
+    button=text_2.render(button_text1[num],1,Black)
     screen.blit(button,(x+2,y+4))
     img=pygame.image.load('cgq.jpg')
     img=pygame.transform.smoothscale(img,(52,50))
@@ -67,8 +67,8 @@ def State_B():
     response=urllib.request.urlopen(line[7])
     button_text[7]="begin"
 def State_C(num):
-    pygame.draw.rect(screen,Brack,[size,573,400,50],0)
-    pygame.draw.rect(screen,Brack,[size,667,400,25],0)
+    pygame.draw.rect(screen,Black,[size,573,400,50],0)
+    pygame.draw.rect(screen,Black,[size,667,400,25],0)
     img=pygame.image.load('car.jpg')
     img=pygame.transform.smoothscale(img,(52,50))
     screen.blit(img,(B0[num],573))
@@ -95,7 +95,7 @@ def GZ():
     button=text_0.render(('Prompt:fault,manual intervention is needed!'),1,Red)
     screen.blit(button,(size,690))
 def Mixer(num,x,y,a):
-    pygame.draw.rect(screen,Brack,[x+20,y+80,25,25],0)
+    pygame.draw.rect(screen,Black,[x+20,y+80,25,25],0)
     button=text_2.render(text1[num],1,White)
     screen.blit(button,(x-30,y+4))
     img=pygame.image.load('cgq.jpg')
@@ -107,10 +107,10 @@ def Mixer(num,x,y,a):
 if __name__ == '__main__':
     while True:
         time.sleep(1.5)
-        pygame.draw.rect(screen,Brack,[size,690,460,30],0)
-        pygame.draw.rect(screen,Brack,[size+70,382,100,28],0)
+        pygame.draw.rect(screen,Black,[size,690,460,30],0)
+        pygame.draw.rect(screen,Black,[size+70,382,100,28],0)
         pygame.draw.rect(screen,Green,[size+177,384,62,25],0)
-        button1=text_1.render("switch",1,Brack)
+        button1=text_1.render("switch",1,Black)
         screen.blit(button1,(size+181,386))
         button=text_1.render(button_text0,1,White)
         screen.blit(button,(size+70,386))
@@ -141,8 +141,8 @@ if __name__ == '__main__':
                 if a not in list:
                     GZ()
             elif b[1]=='-1':
-                pygame.draw.rect(screen,Brack,[size,573,400,50],0)
-                pygame.draw.rect(screen,Brack,[size,667,400,25],0)
+                pygame.draw.rect(screen,Black,[size,573,400,50],0)
+                pygame.draw.rect(screen,Black,[size,667,400,25],0)
                 if a!=['1','1','1','1','1']:
                     GZ()
             C=[[0,size+32,538,int(a[0]),color0[0]],[1,size+102,538,int(a[1]),color0[1]],[2,size+172,538,int(a[2]),color0[2]],[3,size+242,538,int(a[3]),color0[3]],[4,size+312,538,int(a[4]),color0[4]]]
