@@ -16,7 +16,7 @@ import urllib.request
 from pygame.color import THECOLORS
 pygame.init()
 os.environ['SDL_VIDEO_WINDOW_POS']= "%d,%d" % (67,27)
-Brack=[0,0,0]
+Black=[0,0,0]
 White=[255,255,255]
 Red=[255,0,0]
 Green=[0,255,0]
@@ -30,7 +30,7 @@ icon={'11':'kz.jpg','01':'bz.jpg','00':'mz.jpg','10':'gz.jpg'}
 screen = pygame.display.set_mode((int((width-67)/3),height))
 text=pygame.font.SysFont("arial",24)
 text1=pygame.font.SysFont("arial",16)
-screen.fill(Brack)
+screen.fill(Black)
 class Bottles(object):
     def Icon_a(num,x,y,a):  
         img=pygame.image.load(icon[a])
@@ -43,7 +43,7 @@ class Bottles(object):
         img=pygame.image.load('cz0.jpg')
         img=pygame.transform.smoothscale(img,(90,90))
         screen.blit(img,(x,y))
-        pygame.draw.rect(screen,Brack,[x+100,y+30,size0-60,30],0)
+        pygame.draw.rect(screen,Black,[x+100,y+30,size0-60,30],0)
         text_fmt0=text.render(a,3,White)
         screen.blit(text_fmt0,(x+100,y+30))
         pygame.display.update()
@@ -54,7 +54,7 @@ class Bottles(object):
         pygame.display.update()
     def AN(num,x,y,a):  
         pygame.draw.rect(screen,color0[num],[x,y,72,35],0)
-        text_fmt0=text1.render(a,3,Brack)
+        text_fmt0=text1.render(a,3,Black)
         screen.blit(text_fmt0,(x+2,y+4))
         pygame.display.update()
     def SJ(num,x,y,a): 
