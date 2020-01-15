@@ -122,7 +122,7 @@ if __name__ == '__main__':
         response9=urllib.request.urlopen("http://192.168.10.201:5000/level")
         html9=response9.read().decode()
         a=(html9[2:-3].split('], ['))[0].split(', ')
-        b=(html9[2:-3].split('], ['))[1].split(', ')
+        b=(html9[2:-2].split('], ['))[1].split(', ')
         response11=urllib.request.urlopen("http://192.168.10.201:5000/scale")
         html11=response11.read()
         text11=json.loads(html11)
