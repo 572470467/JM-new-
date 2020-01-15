@@ -109,7 +109,7 @@ if __name__ == '__main__':
                                     python=sys.executable
                                     os.execl(python,python,*sys.argv)
                                 elif t[3]=='  ZERO':
-                                    response=urllib.request.urlopen("http://192.168.10.201:5000/zerosclae")                                    
+                                    response=urllib.request.urlopen("http://192.168.10.201:5000/zeroscale")                                    
                                 elif t[0]==2:
                                     if color0[t[0]]==Green:
                                         color0[t[0]]=Red
